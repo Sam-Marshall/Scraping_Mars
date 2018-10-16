@@ -5,8 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Mars</title>
+    <title>Mars News Scraper</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style type="text/css">
+    .siteImg {
+        width: 100% !important;
+        height: auto;
+    }
+
+    .sectionCenter {
+        text-align: center;
+    }
+
+    .scroll {
+        overflow: auto;
+    }
+
+    .scroll div .col-md-4{
+        display: inline-block;
+        text-align: center;
+        padding: 14px;
+        text-decoration: none;
+    }
+    </style>
 </head>
 
 <body>
@@ -16,6 +37,53 @@
             <p>
                 <a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape Mars</a>
             </p>
+        </div>
+        <div class='row'>
+            <div class='col-md-12'>
+                <h2>Latest Mars News</h2>
+            </div>
+        </div>
+        <div class='row' style="display:flex; flex-wrap:wrap;">
+            {% for new in news %}
+            <div class='col-md-4'>
+                <h3>{{ new.article_title }}</h3>
+                <p>{{ new.article_summary }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        <div class='row'>
+            <div class="col-md-8">
+                <img class='siteImg' src={{info.Main_Image}}>
+            </div>
+                <div class="col-md-4">
+                    <div class='row'>
+                        <div class='col-md-12'>
+                            <h3>Current Weather on Mars</h3>
+                            <p>{{info.Weather}}</p>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class='col-md-12'>
+                            <h3>Mars Facts</h3>
+                            {{info.Table_HTML}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class='row sectionCenter'>
+                <div class='col-md-12'>
+                    <h2>Mars Hemispheres</h2>
+                    <hr>
+                </div>
+            </div>
+            <div class='row'>
+                {% for hem in hemi %}
+                <div class="col-md-6 sectionCenter">
+                    <img class='siteImg' src={{hem.Image_Hemisphere_Link}}/>
+                    <h3>{{hem.Image_Hemisphere_Title}}</h3>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </body>

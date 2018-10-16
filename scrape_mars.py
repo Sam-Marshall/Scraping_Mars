@@ -60,9 +60,9 @@ def scrape():
         title = result.find('div', class_='content_title').find('a').text.strip()
         body = result.find('div', class_='rollover_description_inner').text.strip()
         article_information = {
-            'article number': counter,
-            'article title' : title,
-            'articly summary' : body
+            'article_number': counter,
+            'article_title' : title,
+            'article_summary' : body
         }
         
         news_list.append(article_information)
@@ -201,8 +201,8 @@ def scrape():
     hemi_data = []
     for title, link in zip (title_array, final_hemi_img):
         info = {
-            'Image Hemisphere Title' : title,
-            'Image Hemisphere Link' : link
+            'Image_Hemisphere_Title' : title,
+            'Image_Hemisphere_Link' : link
         }
         hemi_data.append(info)
     #print(hemi_data)
@@ -213,9 +213,9 @@ def scrape():
     information = {
         'News' : news_list,
         'Weather' : weather_text,
-        'Main Image' : pic_link_final,
-        'Table HTML' : html_facts_df,
-        'Hemisphere Data' : hemi_data
+        'Main_Image' : pic_link_final,
+        'Table_HTML' : html_facts_df,
+        'Hemisphere_Data' : hemi_data
     }
 
     return information
