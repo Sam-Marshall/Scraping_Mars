@@ -14,7 +14,8 @@ def home():
 		mars_information = doc
 		news = mars_information['News']
 		hemi = mars_information['Hemisphere_Data']
-	return render_template("index.html", info=mars_information, news=news, hemi=hemi)
+		table = mars_information['Table_Data']
+	return render_template("index.html", info=mars_information, news=news, hemi=hemi,table=table)
 
 @app.route('/scrape')
 def scrape():

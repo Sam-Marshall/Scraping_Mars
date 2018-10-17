@@ -146,6 +146,17 @@ def scrape():
     facts_df = facts_df.set_index('Variable')
     facts_df
 
+    table_headers = list(facts_df.index.values)
+    table_values = list(facts_df['Value'].values)
+
+    table_data = []
+    for header, value in zip (table_headers, table_values):
+        info = {
+            'Table_Headers' : header,
+            'Table_Values' : value
+        }
+        table_data.append(info)
+
 
     # In[60]:
 
@@ -153,7 +164,7 @@ def scrape():
     facts_df.to_html('facts.html')
     html_facts_df = facts_df.to_html()
     html_facts_df = html_facts_df.replace('\n', '')
-    html_facts_df
+    #html_facts_df
 
 
     # In[61]:
@@ -214,7 +225,7 @@ def scrape():
         'News' : news_list,
         'Weather' : weather_text,
         'Main_Image' : pic_link_final,
-        'Table_HTML' : html_facts_df,
+        'Table_Data' : table_data,
         'Hemisphere_Data' : hemi_data
     }
 
