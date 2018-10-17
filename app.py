@@ -10,12 +10,19 @@ mongo = PyMongo(app)
 
 @app.route('/')
 def home():
-	for doc in mongo.db.collection.find().sort("_id", pymongo.DESCENDING).limit(1):
-		mars_information = doc
-		news = mars_information['News']
-		hemi = mars_information['Hemisphere_Data']
-		table = mars_information['Table_Data']
-	return render_template("index.html", info=mars_information, news=news, hemi=hemi,table=table)
+	try:
+		for doc in mongo.db.collection.find().sort("_id", pymongo.DESCENDING).limit(1):
+			mars_information = doc
+			news = mars_information['News']
+			hemi = mars_information['Hemisphere_Data']
+			table = mars_information['Table_Data']
+		return render_template("index.html", info=mars_information, news=news, hemi=hemi,table=table)
+	except:
+		mars_information = ''
+		news = ''
+		hemi = ''
+		table = ''
+		return render_template("index.html", info=mars_information, news=news, hemi=hemi,table=table)
 
 @app.route('/scrape')
 def scrape():
