@@ -27,10 +27,6 @@ def scrape():
     chrome_options.add_argument('--no-sandbox')
     browser = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
 
-    #executable_path = {'executable_path': '/usr/local/bin/chromedriver'}
-    #browser = Browser('chrome', **executable_path, headless=False)
-
-
     # In[4]:
 
 
