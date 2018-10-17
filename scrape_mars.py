@@ -21,7 +21,7 @@ def scrape():
     # In[3]:
 
 
-    executable_path = {'executable_path': '/usr/local/bin/chromedriver'}
+    executable_path = {'executable_path': '/app/.apt/usr/bin/google-chrome'}
     browser = Browser('chrome', **executable_path, headless=False)
 
 
