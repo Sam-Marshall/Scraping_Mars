@@ -81,13 +81,14 @@ def scrape():
     # In[9]:
 
 
-    browser.visit(picUrl)
+    #browser.visit(picUrl)
 
 
     # In[10]:
 
 
-    pic_html = browser.html
+    #pic_html = browser.html
+    pic_html = browser.get(picUrl)
     pic_soup = bs(pic_html, 'html.parser')
 
     pic_style = pic_soup.find('article', class_='carousel_item')['style']
