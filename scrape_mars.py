@@ -88,7 +88,8 @@ def scrape():
 
 
     #pic_html = browser.html
-    pic_html = browser.get(picUrl)
+    browser.get(picUrl)
+    pic_html = browser.page_source
     pic_soup = bs(pic_html, 'html.parser')
 
     pic_style = pic_soup.find('article', class_='carousel_item')['style']
@@ -178,13 +179,15 @@ def scrape():
     # In[61]:
 
 
-    browser.visit(hemisUrl)
+    #browser.visit(hemisUrl)
+    browser.get(hemisUrl)
 
 
     # In[64]:
 
 
-    hemi_html = browser.html
+    #hemi_html = browser.html
+    hemi_html = browser.page_source
     hemi_soup = bs(hemi_html, 'html.parser')
 
     hemi_results = hemi_soup.find_all('div', class_='item')
@@ -207,8 +210,10 @@ def scrape():
 
     final_hemi_img = []
     for link in link_array:
-        browser.visit(link)
-        link_html = browser.html
+        #browser.visit(link)
+        browser.get(link)
+        link_html = browser.page_source
+        #link_html = browser.html
         soup = bs(link_html, 'html.parser')
         result = soup.find('div', class_='downloads').find('a').attrs['href']
         final_hemi_img.append(result)
