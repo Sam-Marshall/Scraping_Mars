@@ -5,7 +5,7 @@ import pymongo
 
 app = Flask(__name__)
 
-app.config["MONGO_URI"] = "mongodb://localhost:27017/mars_app"
+app.config["MONGO_URI"] = ENV['MONGODB_URI']
 mongo = PyMongo(app)
 
 @app.route('/')
