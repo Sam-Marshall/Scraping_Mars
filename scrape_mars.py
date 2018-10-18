@@ -1,7 +1,6 @@
-
 # coding: utf-8
+# author : Stacy Marshall October 2018
 
-# In[1]:
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup as bs
@@ -9,58 +8,39 @@ from splinter import Browser
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-
-# In[2]:
 def scrape():
 
+    #All the URLs I will be scraping from
     newsUrl = 'https://mars.nasa.gov/news/'
     picUrl = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
     weatherUrl = 'https://twitter.com/marswxreport?lang=en'
     factsUrl = 'https://space-facts.com/mars/'
     hemisUrl = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
 
-
-    # In[3]:
-
+    #Setting up either a Selenium or Splinter Chrome Webdriver
+    
+    #Comment out this block if you are running locally
     chrome_options = Options()
     chrome_options.binary_location = '/app/.apt/usr/bin/google-chrome'
     chrome_options.add_argument('--disable-gpu')
     chrome_options.add_argument('--no-sandbox')
     browser = webdriver.Chrome(executable_path='/app/.chromedriver/bin/chromedriver', chrome_options=chrome_options)
+    ### End Comment out
 
+    #Comment out this block if you are running on Heroku
     #executable_path = {'executable_path': '/usr/local/bin/chromedriver'}
     #browser = Browser('chrome', **executable_path, headless=False)
+    ### End Comment out
 
-
-    # In[4]:
-
+    #Getting Latest news from https://mars.nasa.gov/news/
 
     news_response = requests.get(newsUrl)
-
-
-    # In[5]:
-
-
     news_soup = bs(news_response.text, 'html.parser')
-
-
-    # In[6]:
-
-
     #print(news_soup.prettify())
-
-
-    # In[7]:
-
 
     news_results = news_soup.body.find_all('div', class_='slide')
     #print(len(news_results))
     news_list = []
-
-
-    # In[8]:
-
-
     counter = 1
 
     for result in news_results:
@@ -77,57 +57,33 @@ def scrape():
         
         news_list.append(article_information)
         counter += 1
-        
     #print(news_list)
 
+    #Getting featured image from https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars
 
-    # In[9]:
-
-
+    #Comment out this block if you are running on Heroku
     #browser.visit(picUrl)
-
-
-    # In[10]:
-
-
     #pic_html = browser.html
+    ### End Comment Out
+
+    #Comment out this block if you are running locally
     browser.get(picUrl)
     pic_html = browser.page_source
+    ### End Comment Out
+
     pic_soup = bs(pic_html, 'html.parser')
-
     pic_style = pic_soup.find('article', class_='carousel_item')['style']
-
-
-    # In[11]:
-
-
     pic_style = pic_style.split("url")[1]
     pic_link = pic_style.split("'")[1]
-
-
-    # In[12]:
-
-
     pic_link_final = 'https://www.jpl.nasa.gov' + pic_link
     #print(pic_link_final)
 
-
-    # In[13]:
-
+    #Getting latest weather update from https://twitter.com/marswxreport?lang=en
 
     weather_response = requests.get(weatherUrl)
     weather_soup = bs(weather_response.text, 'html.parser')
     #print(weather_soup.prettify())
-
-
-    # In[40]:
-
-
     weather_results = weather_soup.find_all('div', class_='content')
-
-
-    # In[41]:
-
 
     weather_text = ''
     for result in weather_results:
@@ -140,19 +96,11 @@ def scrape():
                     break
         except AttributeError as error:
             print(error)
-
     #print(weather_text)
 
-
-    # In[43]:
-
+    #Getting general facts from https://space-facts.com/mars/
 
     facts = pd.read_html(factsUrl)
-
-
-    # In[52]:
-
-
     facts_df = facts[0]
     facts_df = facts_df.rename(columns={0 : 'Variable', 1 : 'Value'})
     facts_df = facts_df.set_index('Variable')
@@ -169,36 +117,25 @@ def scrape():
         }
         table_data.append(info)
 
-
-    # In[60]:
-
-
     facts_df.to_html('facts.html')
     html_facts_df = facts_df.to_html()
     html_facts_df = html_facts_df.replace('\n', '')
     #html_facts_df
 
+    #Getting hemisphere images from https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars
 
-    # In[61]:
-
-
+    #Comment out this block if you are running on Heroku
     #browser.visit(hemisUrl)
-    browser.get(hemisUrl)
-
-
-    # In[64]:
-
-
     #hemi_html = browser.html
+    ### End Comment Out
+    
+    #Comment out this block if you are running locally
+    browser.get(hemisUrl)
     hemi_html = browser.page_source
+    ### End Comment Out
+
     hemi_soup = bs(hemi_html, 'html.parser')
-
     hemi_results = hemi_soup.find_all('div', class_='item')
-
-
-    # In[73]:
-
-
     link_array = []
     title_array = []
     for result in hemi_results:
@@ -207,23 +144,22 @@ def scrape():
         link_array.append(link)
         title_array.append(title)
 
-
-    # In[76]:
-
-
     final_hemi_img = []
     for link in link_array:
+        
+        #Comment out this block if you are running on Heroku
         #browser.visit(link)
+        #link_html = browser.html
+        ### End Comment Out
+
+        #Comment out this block if you are running locally
         browser.get(link)
         link_html = browser.page_source
-        #link_html = browser.html
+        ### End Comment Out
+
         soup = bs(link_html, 'html.parser')
         result = soup.find('div', class_='downloads').find('a').attrs['href']
         final_hemi_img.append(result)
-
-
-    # In[78]:
-
 
     hemi_data = []
     for title, link in zip (title_array, final_hemi_img):
@@ -234,9 +170,8 @@ def scrape():
         hemi_data.append(info)
     #print(hemi_data)
 
-
-    # In[ ]:
-
+    #Organizing scraped data in a dictionary
+    
     information = {
         'News' : news_list,
         'Weather' : weather_text,
