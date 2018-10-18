@@ -111,8 +111,10 @@
                 <div class='row' style="display:flex; flex-wrap:wrap;">
                     {% for new in news %}
                     <div class='col-md-4'>
-                        <h3>{{ new.article_title }}</h3>
-                        <p>{{ new.article_summary }}</p>
+                        <a href={{new.article_link}}>
+                            <h3>{{ new.article_title }}</h3>
+                            <p>{{ new.article_summary }}</p>
+                        </a>
                     </div>
                     {% endfor %}
                 </div>

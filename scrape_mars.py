@@ -66,10 +66,13 @@ def scrape():
     for result in news_results:
         title = result.find('div', class_='content_title').find('a').text.strip()
         body = result.find('div', class_='rollover_description_inner').text.strip()
+        link = 'https://mars.nasa.gov' + result.find('a').attrs['href']
+
         article_information = {
             'article_number': counter,
             'article_title' : title,
-            'article_summary' : body
+            'article_summary' : body,
+            'article_link' : link
         }
         
         news_list.append(article_information)
