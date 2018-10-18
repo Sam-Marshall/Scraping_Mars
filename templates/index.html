@@ -90,13 +90,13 @@
         right: 65%;
     }
 
-    .newsLink{
-        text-decoration:none;
+    .newsLink {
+        text-decoration: none;
         color: black !important;
     }
 
-    .newsLink:hover{
-        text-decoration:none;
+    .newsLink:hover {
+        text-decoration: none;
         color: #f7b532 !important;
     }
     </style>
@@ -110,80 +110,80 @@
                 <a class="btn btn-primary btn-lg scrapeBtn" href="/scrape" role="button">Scrape Mars</a>
                 <img class='curiosityImg' src="https://dumielauxepices.net/sites/default/files/mars-clipart-transparent-background-676531-5794801.png">
             </div>
-            </div>
-            <div class='newsSection'>
-                <div class='row text-center'>
-                    <div class='col-md-12'>
-                        <h2>Latest Mars News</h2>
-                        <hr>
-                    </div>
-                </div>
-                <div class='row' style="display:flex; flex-wrap:wrap;">
-                    {% for new in news %}
-                    <div class='col-md-4'>
-                        <a href={{new.article_link}} class="newsLink">
-                            <h3>{{ new.article_title }}</h3>
-                            <p>{{ new.article_summary }}</p>
-                        </a>
-                    </div>
-                    {% endfor %}
+        </div>
+        <div class='newsSection'>
+            <div class='row text-center'>
+                <div class='col-md-12'>
+                    <h2>Latest Mars News</h2>
+                    <hr>
                 </div>
             </div>
-            <div class='imageWeatherTableSection'>
-                <div class='row'>
-                    <div class="col-md-8">
-                        <img class='siteImg' src={{info.Main_Image}} />
+            <div class='row' style="display:flex; flex-wrap:wrap;">
+                {% for new in news %}
+                <div class='col-md-4'>
+                    <a href={{new.article_link}} class="newsLink">
+                        <h3>{{ new.article_title }}</h3>
+                        <p>{{ new.article_summary }}</p>
+                    </a>
                 </div>
-                        <div class="col-md-4">
-                            <div class='row weatherSection'>
-                                <div class='col-md-12 text-center'>
-                                    <h3 >Current Weather on Mars</h3>
-                                    <hr>
-                                    <p>{{info.Weather}}</p>
-                                </div>
-                            </div>
-                            <div class='row tableSection'>
-                                <div class='col-md-12'>
-                                    <h3 class="text-center">Mars Facts</h3>
-                                    <hr>
-                                    <table border="1" class="text-center">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center">Variable</th>
-                                                <th class="text-center">Value</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {% for row in table %}
-                                            <tr>
-                                                <th class="text-center">{{ row.Table_Headers }}</th>
-                                                <td class="text-center">{{ row.Table_Values }}</td>
-                                            </tr>
-                                            {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class='imageWeatherTableSection'>
+            <div class='row'>
+                <div class="col-md-8" style='display: inline-block;'>
+                    <img class='siteImg' src={{info.Main_Image}} />
+                </div>
+                <div class="col-md-4" style='display: inline-block;'>
+                    <div class='row weatherSection'>
+                        <div class='col-md-12 text-center'>
+                            <h3>Current Weather on Mars</h3>
+                            <hr>
+                            <p>{{info.Weather}}</p>
                         </div>
                     </div>
-                </div>
-                <div class='hemiSection'>
-                    <div class='row text-center'>
+                    <div class='row tableSection'>
                         <div class='col-md-12'>
-                            <h2>Mars Hemispheres</h2>
-                            <hr />
+                            <h3 class="text-center">Mars Facts</h3>
+                            <hr>
+                            <table border="1" class="text-center">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Variable</th>
+                                        <th class="text-center">Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for row in table %}
+                                    <tr>
+                                        <th class="text-center">{{ row.Table_Headers }}</th>
+                                        <td class="text-center">{{ row.Table_Values }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
                         </div>
-                    </div>
-                    <div class='row'>
-                        {% for hem in hemi %}
-                        <div class="col-md-6 text-center hemiDiv">
-                            <img class='siteImg' src={{hem.Image_Hemisphere_Link}}/>
-                            <h4>{{hem.Image_Hemisphere_Title}}</h4>
-                        </div>
-                        {% endfor %}
                     </div>
                 </div>
             </div>
+        </div>
+        <div class='hemiSection'>
+            <div class='row text-center'>
+                <div class='col-md-12'>
+                    <h2>Mars Hemispheres</h2>
+                    <hr />
+                </div>
+            </div>
+            <div class='row'>
+                {% for hem in hemi %}
+                <div class="col-md-6 text-center hemiDiv">
+                    <img class='siteImg' src={{hem.Image_Hemisphere_Link}}/>
+                    <h4>{{hem.Image_Hemisphere_Title}}</h4>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
