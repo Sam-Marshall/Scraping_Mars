@@ -89,6 +89,16 @@
     .scrapeDiv:hover>.curiosityImg {
         right: 65%;
     }
+
+    .newsLink{
+        text-decoration:none;
+        color: black !important;
+    }
+
+    .newsLink:hover{
+        text-decoration:none;
+        color: #f7b532 !important;
+    }
     </style>
 </head>
 
@@ -111,7 +121,7 @@
                 <div class='row' style="display:flex; flex-wrap:wrap;">
                     {% for new in news %}
                     <div class='col-md-4'>
-                        <a href={{new.article_link}}>
+                        <a href={{new.article_link}} class="newsLink">
                             <h3>{{ new.article_title }}</h3>
                             <p>{{ new.article_summary }}</p>
                         </a>
