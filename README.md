@@ -4,14 +4,14 @@ This application was built to scrape the latest information about Mars and displ
 
 ## Required Packages
 
--beautifulsoup4==4.6.0
--Flask==1.0.2
--Flask-PyMongo==2.1.0
--gunicorn==19.9.0
--pandas==0.23.0
--requests==2.18.4
--selenium==3.14.1
--lxml==4.2.1
+- beautifulsoup4==4.6.0
+- Flask==1.0.2
+- Flask-PyMongo==2.1.0
+- gunicorn==19.9.0
+- pandas==0.23.0
+- requests==2.18.4
+- selenium==3.14.1
+- lxml==4.2.1
 
-splinter==0.9.0 (*not used in the deployed app, but used during local development)
+- splinter==0.9.0 (*not used in the deployed app, but used during local development)
 
