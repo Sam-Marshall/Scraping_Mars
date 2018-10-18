@@ -4,6 +4,9 @@ This application was built to scrape the latest information about Mars and displ
 
 The live app can be found here: https://mars-update-center.herokuapp.com/
 
+![Mars Scraping App](https://github.com/Sam-Marshall/Scraping_Mars/blob/master/screenShot.jpeg)
+The app presents a clean experience that makes scraping and review data easy.
+
 ## Required Packages
 
 - beautifulsoup4==4.6.0
